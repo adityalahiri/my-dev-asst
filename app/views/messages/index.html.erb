@@ -1,21 +1,30 @@
-<div class="header">
-  <div class="container">
-    <h1>Messenger</h1>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+</head>
+<main>
+  <div class="chat-window">
+    <div class="messages">
+      <% @messages.each do |message| %>
+        <div class="message">
+          <p><%= message.content %></p>
+          <span class="timestamp"><%= message.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
+        </div>
+      <% end %>
+    </div>
 
-<div class="messages">
-  <div class="container">
-  
-    <!-- Your code here -->
-<% @messages.each do |message| %> 
-  <div class="message"> 
-    <p class="content"><%= message.content %></p> 
-    <p class="time"><%= message.created_at %></p> 
-  </div> 
-<% end %> 
-<%= link_to 'New Message', "messages/new" %> 
-
+    <div class="input-area">
+      <%= form_for Message.new do |form| %>
+      <%= form.label :message %><br> 
+        <%= form.text_area :content, placeholder: "Type your message here..." %>
+        <%= form.submit "Send" %>
+      <% end %>
+<%= link_to 'LLM!', invoke_llm_messages_path %>
+    </div>
   </div>
-</div>
+</main>
+
 

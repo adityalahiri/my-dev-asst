@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get '/messages', to: 'messages#index'
   get '/messages/new', to:'messages#new'
   post 'messages', to:'messages#create'
+  resources :messages do
+    get 'invoke_llm', on: :collection
+  end
   # Defines the root path route ("/")
   # root "articles#index"
 end
